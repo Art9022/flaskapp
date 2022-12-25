@@ -1,9 +1,9 @@
 
 ARG mod=prodaction
 
-FROM python:3.8-slim-buster
+FROM python
 
-RUN apt-get update -y && apt-get install -y python-pip python-dev
+RUN apt-get update -y && apt-get install -y python3-pip python3-dev
 
 COPY ./requirements.txt /app/requirements.txt
 
