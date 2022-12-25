@@ -14,5 +14,21 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    
+    - name: build
+      run:  docker build -t artur9022/flaskapp_production .
+
+    - name: Docker conteiner
+      run:  docker run  artur9022/flaskapp_production
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+          username: artur9022
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build and push
+      uses: docker/build-push-action@v3
+      with:
+          push: true
+          tags: artur9022/flaskapp_production:latest
